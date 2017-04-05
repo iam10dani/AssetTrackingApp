@@ -1,0 +1,129 @@
+<!-- Modal -->
+<div id="viewConsultantModel" class="modal fade" role="dialog" tabindex="-1" id="viewConsultantModel">
+    <div class="modal-dialog" style="width: 60%;">
+        <!-- Modal content-->
+        <div class="modal-content" style="align-content:center;" ng-controller="consultantCtrl">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Consultant Details for: <span style="word-wrap: break-word" class="break-word">{{viewConsultant.name}}</span></h4>
+            </div>
+            <div class="modal-body" style="margin:10px 50px;">
+
+                <table align="center">
+                    <col width="200">
+                    <col width="500">
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <img ng-src="{{viewConsultant.imageURL || defaultImageUrl}}" width="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <strong>Practice:</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            {{viewConsultant.practiceName}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" >
+                                        <div class="row">
+                                            <strong>Consultant Name:</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            {{viewConsultant.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <strong>Client Name:</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            {{viewConsultant.clientName}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <strong>Employment Type:</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            {{viewConsultant.employmentType}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+
+            <hr />
+
+
+            <div class="modal-body" style="margin:10px 30px;">
+                <h4><strong>Assets Assigned</strong></h4>
+                <br/>
+                <span us-spinner="{radius:30, width:8, length: 16}"></span>
+                <table class="table table-hover" ng-table="tableParams" >
+                    <thead id="header">
+                    <tr id="hrow">
+                        <th>Asset Picture</th>
+                        <th>Asset Tag</th>
+                        <th>Practice</th>
+                        <th>Name</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody class="loading" id="aatbody" style="display: block; height: 150px; overflow: auto;">
+                    <tr><label style="color: #a92222">{{noAssetsMessage}}</label></tr>
+                    <tr id="brow" ng-repeat="ast in asts" title="asset details for {{ast.assetTag}}" style="cursor:pointer" >
+                        <th ng-click="assetGalleryClick(ast.assetID)" data-target="#assetGalleryModel" data-toggle="modal"><img ng-src="{{ast.propic}}" height="50" width="50" /><sup class="badge">{{ast.imageURL.length}}</sup></th>
+                        <th>{{ast.assetTag}}</th>
+                        <th>{{ast.practiceName}}</th>
+                        <td>{{ast.assetTypeName}}</td>
+                        <td>{{ast.manufacturer}}</td>
+                        <td>{{ast.identifier}}</td>
+                        <td>{{ast.assetDescription}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reloadRoute()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+<style>
+    .break-word {
+   word-wrap:break-word;
+    overflow: hidden;
+   text-overflow: ellipsis;
+}
+</style>

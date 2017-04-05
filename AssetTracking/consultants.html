@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ng-app="consultant">
+<head>
+    <title>Consultants</title>
+
+    <link rel="stylesheet" href="bootstrap/fonts/bootstrap.min.css" />
+    <link rel="stylesheet prefetch" href="css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="styles/Consultant.css"/>
+    <link rel="icon" href="images/logo2.jpg">
+    <link rel="stylesheet"  href="https://select2.github.io/dist/css/select2.min.css"/>
+
+    <script src="angular.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="es5-shim.min.js"></script>
+    <script src="es5-sham.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap-notify-3.1.3/bootstrap-notify.js"></script>
+    <script type="text/javascript"  src="js/consultantCtrl.js"></script>
+
+    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+</head>
+<body ng-controller="consultantCtrl">
+
+
+<div ng-include="'_createConsultant.html'"></div>
+<div ng-include="'_viewConsultant.html'"></div>
+<div ng-include="'_assetGallery.html'"></div>
+
+
+<div id="leftNavBar" style="display: none;" class="navbar navbar-inverse navbar-fixed-left shadow-right">
+    <br class="nav navbar-nav"/>
+    <img src="logo.png" class="img-rounded" width="90%" align="middle" style="margin-left: 5%"/>
+
+    <p class="h4" align="center" margin-top="20">ASSET MANAGEMENT</p>
+    <hr style="width:95%"/>
+    <ul style="list-style: none;">
+        <li><a href="Views/angular.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-list-alt" style="margin-right: 1em"></span>Assets <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countA}}</span></span></a></li>
+        <hr style="width:95%;"/>
+        <li><a href="Views/consultants.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-user" style="margin-right: 1em"></span>Consultants <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countC}}</span></span></a></li>
+        <hr style="width:95%"/>
+        <!--<p><a href="#" onclick="logout()">Logout</a></a></p>-->
+        <nav aria-label="..." class="pull-left">
+            <ul class="pager">
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </ul>
+</div>
+<div class="container">
+    <div class="row">
+
+        <div>
+            <section>
+                <nav class="col-md-12 nav-collapse">
+                    <div class="row">
+                        <h2>Consultants</h2>
+                        <ul class="pager">
+                        </ul>
+                    </div>
+                </nav>
+                <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#createConsultantModel">Create Consultant</button>
+                <div class="col-xs-4">
+                    <input ng-model="query" type="text" class="form-control" placeholder="search"/>
+                </div>
+                <table  fixed-header class="table table-hover" ng-table="tableParams" >
+                    <thead id="header">
+                    <tr id="hrow">
+                        <th>Profile Picture</th>
+                        <th  class="dropdown">
+                            <div style="cursor:pointer" data-toggle="dropdown" class="dropdown-toggle">Practice <b class="caret"></b></div>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="" ng-model="modal" ng-click="filterByPractice('All')">All Practices</a>
+                                </li>
+                                <li ng-repeat="practices in practices" >
+                                    <a href="" ng-model="modal" ng-click="filterByPractice(practices.name)">{{practices.name}}</a>
+                                </li>
+                            </ul>
+                        </th>
+                        <th>Name</th>
+                        <th ng-click="sortData('employmentType')" style="cursor:pointer">Employee Type <span ng-class="getSortClass('employmentType')"></span></th>
+                        <th ng-click="sortData('clientName')" style="cursor:pointer">Current Client <span ng-class="getSortClass('clientID')"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tablebody" class="loading">
+                    <tr id="brow" ng-repeat="consultant in consultants | filter:query | filter:practiceFilter | orderBy:sortColumn:reverseSort" ng-click="viewConsultantClick(consultant.consultantID)"  data-target="#viewConsultantModel" data-toggle="modal"  title="click to see details for {{consultant.name}}" style="cursor:pointer">
+                        <td>
+                            <div class="dropdown">
+                                <img ng-src="{{consultant.imageURL || defaultImageUrl}}" height="50" width="50"/>
+                                <div class="dropdown-content">
+                                    <img ng-src="{{consultant.imageURL || defaultImageUrl}}"  width="300" height="200">
+                                    <div class="desc">{{consultant.name}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <th style="word-wrap: break-word" class="truncate">{{consultant.practiceName}}</th>
+                        <td style="word-wrap: break-word" class="truncate">{{consultant.name}}</td>
+                        <td style="word-wrap: break-word" class="truncate">{{consultant.employmentType}}</td>
+                        <td style="word-wrap: break-word" class="truncate">{{consultant.clientName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- scripts -->
+
+<script src="ng/console-sham.min.js"></script>
+<script src="ng/angular-file-upload.min.js"></script>
+<script src="ng/underscore-min.js"></script>
+<script type="text/javascript" src="https://select2.github.io/dist/js/select2.full.js"></script>
+
+
+</html>
+<script>
+   function showButtonSpinner(){
+          $("#buttonLoader").removeClass("loader-invisible");
+    }
+
+    function hideButtonSpinner(){
+          $("#buttonLoader").addClass("loader-invisible");
+    }
+
+     function initPicker(){
+
+
+        $(".js-example-basic-multiple").select2({
+             tags: true,
+              dropdownParent: $("#createConsultantModel")
+          });
+        }
+
+</script>
+<script type="text/javascript">
+        function getClientID(clientName, clientsArray){
+                for(var i=0;i< clientsArray.length;i++){
+                console.log("checking : "+JSON.stringify(clientsArray[i]));
+                var name = clientsArray[i].name;
+                    if(name== clientName){
+                      return clientsArray[i].clientID;
+                    }
+                }
+                return null;
+        }
+</script>

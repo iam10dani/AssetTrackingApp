@@ -1,0 +1,106 @@
+.progressShow{
+        display:block;
+    }
+
+    .progressHide {
+    display:none;
+}
+
+
+
+.loader-invisible {
+    visibility:hidden;
+}
+
+.error-message{
+            color:red;
+       }
+
+.required-field{
+        color:red;
+    }
+
+    #leftNavBar{
+        display: block !important;
+        position: fixed;
+    }
+
+    .navbar-fixed-left {
+        width: 15%;
+        position: fixed;
+        border-radius: 0;
+        height: 100%;
+        background-color: #f6f6f6;
+        border-color:darkgray;
+        text-decoration-color: black;
+        box-shadow: inset -7px 0 1em -7px #333333;
+    }
+
+    .navbar-fixed-left .navbar-nav > li {
+        float: none;  /* Cancel default li float: left */
+        width: 100%;
+    }
+
+    .navbar-fixed-left + .container {
+        padding-left: 160px;
+    }
+
+    /* On using dropdown menu (To right shift popuped) */
+    .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+        margin-top: 50px;
+        margin-left: 50px;
+        text-align: center;
+    }
+
+    #tablebody {
+        display: block;
+        overflow: auto;
+    }
+    #row{
+    position: fixed;
+    }
+
+    #hrow, #brow {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+
+    }
+
+    #header {
+        width: calc( 100% - 1em );
+        table-layout: fixed;
+    }
+
+     .loading {
+        background: transparent url('images/loadingAnimation.svg') center no-repeat;
+    }
+
+    .dropdown {
+    position: left;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left:50px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+ .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

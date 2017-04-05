@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html ng-app="myAsset">
+<head>
+    <title>Assets</title>
+
+    <link rel="stylesheet" href="bootstrap/fonts/bootstrap.min.css" />
+    <link rel="stylesheet prefetch" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet prefetch" href="styles/angular.css"/>
+    <link rel="icon" href="images/logo2.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet"  href="https://select2.github.io/dist/css/select2.min.css"/>
+    <script src="angular.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <script src="functions.js"></script>
+    <script src="es5-shim.min.js"></script>
+    <script src="es5-sham.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap-notify-3.1.3/bootstrap-notify.js"></script>
+    <script type="text/javascript"  src="js/assetCtrl.js"></script>
+
+
+    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+
+<body ng-controller="assetCtrl">
+<span us-spinner="{radius:30, width:8, length: 16}"></span>
+
+<div ng-include="'_createAsset.html'"></div>
+<div ng-include="'_viewAsset.html'"></div>
+<div ng-include="'_assetGallery.html'"></div>
+
+
+<div id="leftNavBar" style="display: none;" class="navbar navbar-inverse navbar-fixed-left shadow-right">
+    <br class="nav navbar-nav"/>
+    <img src="logo.png" class="img-rounded" width="90%" align="middle" style="margin-left: 5%"/>
+
+    <p class="h4" align="center" margin-top="20">ASSET MANAGEMENT</p>
+    <hr style="width:95%"/>
+    <ul style="list-style: none;">
+        <li><a href="Views/angular.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-list-alt" style="margin-right: 1em"></span>Assets <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countA}}</span></span></a></li>
+        <hr style="width:95%;"/>
+        <li><a href="Views/consultants.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-user" style="margin-right: 1em"></span>Consultants <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countC}}</span></span></a></li>
+        <hr style="width:95%"/>
+        <!--<p><a href="#" onclick="logout()">Logout</a></a></p>-->
+        <nav aria-label="..." class="pull-left">
+            <ul class="pager">
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <section>
+
+            <nav class="nav-collapse">
+                <div class="form-inline" style="width: 109%; max-width: 109%;">
+                    <h2>Assets</h2>
+                    <input ng-model="query" type="text" style="width: 15em" class="form-control col-md-4" placeholder="search"/>
+                    <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#createAssetModel" onchange="initDate()">Create Asset</button>
+                </div>
+            </nav>
+
+            <br/>
+            <!--<div ng-show="!(practices| filter:modal).length">No Tag Found</div>-->
+            <table fixed-header class="table table-hover" ng-table="tableParams" style="width: 110%; max-width: 110%;">
+                <thead id="header">
+                <tr id="hrow">
+                    <th>Images</th>
+                    <th ng-click="sortData('assetTag')" style="cursor:pointer">Asset Tag <span ng-class="getSortClass('assetTag')"></span></th>
+                    <th  class="dropdown">
+                        <div style="cursor:pointer" data-toggle="dropdown" class="dropdown-toggle">Practice <b class="caret"></b></div>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="" ng-model="modal" ng-click="filterByPractice('All')">All Practices</a>
+                            </li>
+                            <li ng-repeat="practices in practices" >
+                                <a href="" ng-model="modal" ng-click="filterByPractice(practices.name)">{{practices.name}}</a>
+
+                            </li>
+                        </ul>
+                    </th>
+                    <th class="dropdown">
+                        <div style="cursor:pointer" data-toggle="dropdown" class="dropdown-toggle">Types <b class="caret"></b></div>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="" ng-model="modal" ng-click="filterByType('All')">All Types</a>
+                            </li>
+                            <li ng-repeat="type in assetTypes" >
+                                <a href="" ng-model="modal" ng-click="filterByType(type.assetTypeName)">{{type.assetTypeName}}</a>
+                            </li>
+                        </ul>
+                    </th>
+                    <th ng-click="sortData('manufacturer')" style="cursor:pointer">Make <span ng-class="getSortClass('manufacturer')"></span></th>
+                    <th ng-click="sortData('identifier')" style="cursor:pointer">Model <span ng-class="getSortClass('identifier')"></span></th>
+                    <th>Description</th>
+                    <th ng-click="sortData('status')" style="cursor:pointer">Status <span ng-class="getSortClass('status')"></span></th>
+                    <th ng-click="sortData('consultantName')" style="cursor:pointer">Assigned to <span ng-class="getSortClass('consultantName')"></span></th>
+                </tr>
+                </thead>
+                <br/>
+                <!--<div class="alert alert-info alert-dismissable" id="info">-->
+                    <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+                    <!--<strong>Info!</strong> No Assets available for this Practice.-->
+                <!--</div>-->
+                <tbody id="tablebody" class="loading">
+                <tr id="brow" ng-repeat="ast in asset | filter:query | filter:typeFilter | filter:practiceFilter | orderBy:sortColumn:reverseSort" title="click to see details for {{ast.assetTag}}" style="cursor:pointer" >
+                    <th ng-click="assetGalleryClick(ast.assetID)" data-target="#assetGalleryModel" data-toggle="modal"><img ng-src="{{ast.propic}}" height="50" width="50" /><sup class="badge">{{ast.imageURL.length}}</sup></th>
+                    <th ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal">{{ast.assetTag}}</th>
+                    <th ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal">{{ast.practiceName}}</th>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal">{{ast.assetTypeName}}</td>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal" style="word-wrap: break-word" class="truncate">{{ast.manufacturer}}</td>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal" style="word-wrap: break-word" class="truncate">{{ast.identifier}}</td>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal" style="word-wrap: break-word" class="truncate">{{ast.assetDescription}}</td>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal">{{ast.status}}</td>
+                    <td ng-click="viewAssetClick(ast.assetID)" data-target="#viewAssetModel" data-toggle="modal" style="word-wrap: break-word" class="truncate">{{ast.consultantName}}</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<!-- scripts -->
+<!--script src="http://code.jquery.com/jquery-3.1.1.min.js"></script-->
+
+<script src="ng/console-sham.min.js"></script>
+<script src="ng/angular-file-upload.min.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+<script src="ng/underscore-min.js"></script>
+<script src="ng/spin.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<script type="text/javascript" src="https://select2.github.io/dist/js/select2.full.js"></script>
+
+
+<script>
+      //  $("#tablebody").css(fixed header, ($(document).innerHeight() - $(".nav-collapse")));
+        $("#assetGalleryModel").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+
+    </script>
+
+<script>
+        function successful(){
+                      $("#success").removeClass("progressHide");
+                      $("#success").addClass("progressShow");
+                }
+
+        $(document).ready(function() {
+            initDate();
+            $('#success').on('closed.bs.alert', function () {
+             location.reload();
+             })
+        });
+        function initDate(){
+            $('#date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                maxDate: "-1"
+            });
+        }
+
+           function initPicker(){
+
+
+        $(".js-example-basic-multiple").select2({
+             tags: true,
+              dropdownParent: $("#createAssetModel")
+          });
+        }
+
+
+        $("#date" ).click(function() {
+          $('#date').datepicker({
+             dateFormat: 'dd-mm-yy',
+             maxDate: "-1",
+
+             });
+        });
+
+
+
+    </script>
+<script type="text/javascript">
+        function getMakeId(assetMakeName, makesArray){
+                for(var i=0;i< makesArray.length;i++){
+                console.log("checking : "+JSON.stringify(makesArray[i]));
+                var name = makesArray[i].makeName;
+                    if(name== assetMakeName){
+                      return makesArray[i].makeID;
+                    }
+                }
+                return null;
+        }
+</script>
+</body>
+</html>
+<script>
+   function showButtonSpinner(){
+          $("#buttonLoader").removeClass("loader-invisible");
+    }
+
+    function hideButtonSpinner(){
+          $("#buttonLoader").addClass("loader-invisible");
+    }
+</script>

@@ -1,0 +1,33 @@
+<style>
+    #galImg{
+
+        height: 300px;
+    }
+</style>
+
+<div id="assetGalleryModel" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" >
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Asset Image Gallery</h4>
+            </div>
+            <div class="modal-body" style="height: 400px !important;">
+
+                <div class="col-md-12 loading">
+                    <div class="col-md-2">
+                    <button ng-click="prev()" move-pic="prev()" id="prev" class="btn col-md-2 glyphicon glyphicon-chevron-left" style="margin-top: 150px; padding: 6px 25px 6px 12px;" ng-hide="imgView.length == 0 || imgView.length == 1"> </button>
+                    </div>
+                    <div class="col-md-8" id="galImg" ></div>
+                    <div class="col-md-2">
+                    <button ng-click="next()" move-pic="next()" id="next" class="btn col-md-2 glyphicon glyphicon-chevron-right" style="margin-top: 150px; padding: 6px 25px 6px 12px;" ng-hide="imgView.length == 0 || imgView.length == 1"> </button>
+                    </div>
+                </div>
+                <div style="alignment: center">
+                    <label>{{numberOfAssetPics}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,242 @@
+<!-- Modal -->
+<div id="viewAssetModel" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" style="width: 60%;" >
+        <!-- Modal content-->
+        <div class="modal-content" style="align-content:center;" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                <h4 class="modal-title">Asset Details for: {{viewAsset.assetTag}}</h4>
+            </div>
+            <div class="modal-body" style="margin:10px 50px;">
+
+                <table align="center">
+                    <col width="250">
+                    <col width="500">
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row pull-left">
+                                        <img id="propic" ng-src="{{viewAsset.propic || defaultImageUrl}}" width="200"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Asset Tag:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.assetTag}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Practice:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.practiceName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Asset Type:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        {{viewAsset.assetTypeName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Make:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.manufacturer}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Model:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.identifier}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Description:</strong><br/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row truncate">
+                                        <span title="(cick and hold to see more)">{{viewAsset.assetDescription}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Date Aquired:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.dateAcquired | date : 'yyyy-MM-dd  hh:mm a' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Serial Number:</strong><br/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row truncate">
+                                        <span title="(cick and hold to see more)">{{viewAsset.serialNumber}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Assignment Status:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.status}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <strong>Assigned to:</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        {{viewAsset.consultantName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+
+            <form ng-submit="updateAsset()" >
+                <div style="margin:10px 50px;">
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td style="word-wrap: break-word" class="truncate">
+                                        <label>Consultants:</label>
+                                        <select id="consultSelect" class="form-control margin-top-5" style="width:250px;" ng-model="consult.consultants" ng-options="x.name for x in consultants"></select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+
+                                    <td>
+                                        <label>Assignment Status:</label>
+                                        <select id="statusSelect" class="form-control margin-top-5" style="width:200px;" ng-model="statuses.status" ng-options="x.statusDescription for x in status"></select>
+                                    </td>
+                                    <td>
+                                        <label class="status" style="color: #3c763d;  min-width: 768px">{{updateSuccessful}}</label>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="input-group row" style="margin-top:70px">
+                                <input ng-model="note.eventNotes" type="text" class="form-control" placeholder="add event notes" style="margin-left:28px">
+                                <span class="input-group-btn">
+                                    <input id="updateButton" type="submit" class="btn btn-primary" value="Update"/>
+                                </span>
+                        </div>
+
+                        </div>
+                    </div>
+                    <hr />
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1" style="color:blue;">Click me to view Asset History</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <ul class="list-group" ng-repeat="histories in historys">
+                        <div class="accordion-heading well">
+                            <th ng-click="assetGalleryClick(ast.assetID)" data-target="#assetGalleryModel" data-toggle="modal"><img id="propic" ng-src="{{viewAsset.propic || defaultImageUrl}}" height="50" width="50"/><sup class="badge">{{ast.imageURL.length}}</sup></th>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                {{histories.status}}
+                                <span class="pull-right">{{histories.eventDate  | date:'dd-M-yyyy H:mm'}}</span>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                            <div class="accordion-inner well">
+                                <li class="list-group-item"><b>From Practice:</b><span style="color:#16106E;" class="pull-right" >{{histories.previousPractice}}</span></li>
+                                <li class="list-group-item"><b>To Practice:</b><span style="color:#16106E;" class="pull-right">{{histories.practiceName}}</span></li>
+                                <li class="list-group-item"><b>From Consultant:</b><span style="color:#16106E;" class="pull-right truncate" style="word-wrap: break-word">{{histories.previuosconsultant}}</span></li>
+                                <li class="list-group-item"><b>To Consultant:</b><span style="color:#16106E;" class="pull-right truncate" style="word-wrap: break-word">{{histories.consultantName}}</span></li>
+                                <li class="list-group-item"><b>Event Notes:</b><span style="color:#16106E;" class="pull-right" >{{histories.eventNotes}}</span></li>
+                                <li class="list-group-item"><b>Location:</b><span style="color:#16106E;" class="pull-right truncate" style="word-wrap: break-word">{{histories.eventLocation}}</span></li>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="panel-footer">History</div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reloadRoute()">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+    .truncate:active {
+        width: 250px;
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .modal fade{
+    height: 100%;
+    width :100%;
+    }
+
+</style>

@@ -1,0 +1,86 @@
+.progressShow{
+        display:block;
+    }
+
+    .progressHide {
+    display:none;
+}
+ .error-message{
+             color:red;
+        }
+
+.loader-invisible {
+    visibility:hidden;
+}
+    .required-field{
+        color:red;
+    }
+    .truncate {
+        width: 115px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #leftNavBar{
+        display: block !important;
+    }
+
+    .navbar-fixed-left {
+        width: 15%;
+        position: fixed;
+        border-radius: 0;
+        height: 100%;
+        background-color: #f6f6f6;
+        border-color:darkgray;
+        text-decoration-color: black;
+        box-shadow: inset -7px 0 1em -7px #333333;
+    }
+
+    .navbar-fixed-left .navbar-nav > li {
+        float: none;  /* Cancel default li float: left */
+        width: 100%;
+    }
+
+    .navbar-fixed-left + .container {
+        padding-left: 160px;
+    }
+
+    /* On using dropdown menu (To right shift popuped) */
+    .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+        margin-top: 50px;
+        margin-left: 50px;
+       text-align: center;
+    }
+
+    #tablebody {
+        display: block;
+        overflow: auto;
+    }
+
+    #hrow, #brow {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    #header {
+        width: calc( 100% - 1em );
+    }
+ .loading {
+        background: transparent url('images/loadingAnimation.svg') center no-repeat;
+    }
+
+
+    .clsDatePicker {
+    z-index: 100000;
+}
+
+.accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: "\f078";
+    float: right;
+}
+.accordion-opened .accordion-toggle:after {
+    content: "\f054";
+}

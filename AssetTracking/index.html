@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="myAsset">
+<head>
+    <title>Assets</title>
+
+    <link rel="stylesheet" href="bootstrap/fonts/bootstrap.min.css" />
+    <link rel="stylesheet prefetch" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet prefetch" href="styles/angular.css"/>
+    <link rel="icon" href="images/logo2.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet"  href="https://select2.github.io/dist/css/select2.min.css"/>
+    <script src="angular.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <script src="es5-shim.min.js"></script>
+    <script src="es5-sham.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap-notify-3.1.3/bootstrap-notify.js"></script>
+    <script type="text/javascript"  src="js/assetCtrl.js"></script>
+
+    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+
+</head>
+
+<body ng-controller="assetCtrl">
+<span us-spinner="{radius:30, width:8, length: 16}"></span>
+
+<div ng-include="'_createAsset.html'"></div>
+<div ng-include="'_viewAsset.html'"></div>
+<div ng-include="'_assetGallery.html'"></div>
+
+<div id="leftNavBar" style="display: none;" class="navbar navbar-inverse navbar-fixed-left shadow-right">
+    <br class="nav navbar-nav"/>
+    <img src="logo.png" class="img-rounded" width="90%" align="middle" style="margin-left: 5%"/>
+
+    <p class="h4" align="center" margin-top="20">ASSET MANAGEMENT</p>
+    <hr style="width:95%"/>
+    <ul style="list-style: none;">
+        <li><a href="angular.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-list-alt" style="margin-right: 1em"></span>Assets <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countA}}</span></span></a></li>
+        <hr style="width:95%;"/>
+        <li><a href="consultants.html" style="text-decoration: none; color: black"><span class="glyphicon glyphicon-user" style="margin-right: 1em"></span>Consultants <span class="pull-right" style="margin-right: 5% !important"><span class="badge">{{countC}}</span></span></a></li>
+        <hr style="width:95%"/>
+    </ul>
+</div>
+
+<div class="container">
+    <div ng-view></div>
+
+</div>
+
+<!-- scripts -->
+<!--script src="http://code.jquery.com/jquery-3.1.1.min.js"></script-->
+<script src="ng/console-sham.min.js"></script>
+<script src="ng/angular-file-upload.min.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+<script src="ng/underscore-min.js"></script>
+<script src="ng/spin.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<script type="text/javascript" src="https://select2.github.io/dist/js/select2.full.js"></script>
+
+
+<script>
+        $("#tablebody").css("height", ($(document).innerHeight() - $(".nav-collapse").height() - 177))
+        $("#assetGalleryModel").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+
+    </script>
+
+<script>
+        function successful(){
+                      $("#success").removeClass("progressHide");
+                      $("#success").addClass("progressShow");
+                }
+
+        $(document).ready(function() {
+            initDate();
+            $('#success').on('closed.bs.alert', function () {
+             location.reload();
+             })
+        });
+        function initDate(){
+             $('#date').datepicker({
+             dateFormat: 'dd-mm-yy',
+             minDate: '+5d',
+             changeMonth: true,
+             changeYear: true,});
+
+
+
+        }
+
+           function initPicker(){
+
+
+        $(".js-example-basic-multiple").select2({
+             tags: true,
+              dropdownParent: $("#createAssetModel")
+          });
+        }
+
+
+        $("#date" ).click(function() {
+          $('#date').datepicker({
+             dateFormat: 'dd-mm-yy',
+             minDate: '+5d',
+             changeMonth: true,
+             changeYear: true,
+
+             });
+        });
+
+
+
+    </script>
+<script type="text/javascript">
+        function getMakeId(assetMakeName, makesArray){
+                for(var i=0;i< makesArray.length;i++){
+                console.log("checking : "+JSON.stringify(makesArray[i]));
+                var name = makesArray[i].makeName;
+                    if(name== assetMakeName){
+                      return makesArray[i].makeID;
+                    }
+                }
+                return null;
+        }
+</script>
+</body>
+</html>
+<script>
+   function showButtonSpinner(){
+          $("#buttonLoader").removeClass("loader-invisible");
+    }
+
+    function hideButtonSpinner(){
+          $("#buttonLoader").addClass("loader-invisible");
+    }
+</script>
+
+</html>
+

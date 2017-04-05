@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="300px" height="300px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<circle id="outerCircle" fill="none" stroke="#2B398B" stroke-width="4.5" stroke-miterlimit="10" stroke-dasharray="65" cx="50" cy="50" r="40">
+<!-- stroke="#00AEEF" -->
+	<animateTransform attributeName="transform" 
+		 attributeType="XML" 
+		 type="rotate" 
+		 from="0 50 50" 
+		 to="360 50 50" 
+		 dur="3.5s" 
+		 repeatCount="indefinite"  />
+</circle>
+<circle id="middleCircle" fill="none" stroke-width="4.25" stroke="#FDBB30" stroke-miterlimit="1" stroke-dasharray="90" cx="50" cy="50" r="30">
+<!-- stroke="#00AEEF" -->
+	<animateTransform attributeName="transform" 
+		 attributeType="XML" 
+		 type="rotate" 
+		 from="0 50 50" 
+		 to="-360 50 50" 
+		 dur="1.75s" 
+		 repeatCount="indefinite" />
+</circle>
+<circle id="innerCircle" fill="none" stroke-width="4" stroke="#c2c2c2" stroke-miterlimit="0" stroke-dasharray="60" cx="50" cy="50" r="20">
+<!-- stroke="#00AEEF" -->
+	<animateTransform attributeName="transform" 
+		 attributeType="XML" 
+		 type="rotate" 
+		 from="0 50 50" 
+		 to="360 50 50" 
+		 dur="1.25s" 
+		 repeatCount="indefinite"  />
+</circle>
+</svg>
+

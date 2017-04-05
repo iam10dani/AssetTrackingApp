@@ -1,0 +1,53 @@
+<html>
+    <head>
+
+        <title>DVT Login</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="jquery/jquery.min.js"></script>
+        <script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
+        <script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript"  src="misc/encrypt.js"></script>
+        <script type="text/javascript"  src="bootstrap-notify-3.1.3/bootstrap-notify.js"></script>
+
+        <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+        <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+        <script type="text/javascript"  src="js/logInCtrl.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet prefetch" href="styles/font-awesome.min.css"/>
+        <link rel="icon" href="images/logo2.jpg">
+        <link rel="stylesheet prefetch" href="styles/angular.css"/>
+        <link rel="stylesheet" href="styles/particle-style.css" />
+        <link rel="//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-cookies.js"/>
+        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+
+  <body ng-app="Authentication">
+  <div class="container"  ng-controller="LoginController">
+      <div id="login-box">
+          <div class="alert alert-danger progressHide" id="incorrect">
+              <strong>Incorrect Username or Password </strong>
+          </div>
+          <div class="logo">
+              <img src="images/dvticon.png" class="img-circle center-block" alt="dvt log" width="150" height="150"/>
+              <h1 class="logo-caption">Login</h1>
+          </div><!-- /.logo -->
+          <div class="controls">
+              <form ng-submit="LogIn(username, password)">
+              <input ng-model="username" type="username"  class="form-control" placeholder="Email" required="" autofocus=""/>
+              <br/>
+              <input ng-model="password" type="password"  class="form-control" placeholder="Password" required=""/>
+              <br/>
+              <button  type="submit" value= "Submit" class="btn btn-primary btn-lg btn-block">Login</button>
+              </form>
+          </div><!-- /.controls -->
+      </div><!-- /#login-box -->
+  </div><!-- /.container -->
+  <div id="particles-js"></div>
+</body>
+    <script src="js/functions.js"></script>
+    <script src="scripts/particle-script.js" > </script>
+</html>
+
